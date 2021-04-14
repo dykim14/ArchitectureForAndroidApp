@@ -1,0 +1,2 @@
+rootProject.name = "ArchitectureForAndroidApp"
+include ':app'
