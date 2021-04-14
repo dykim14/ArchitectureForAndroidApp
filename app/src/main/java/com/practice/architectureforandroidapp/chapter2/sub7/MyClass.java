@@ -1,4 +1,4 @@
-package com.practice.architectureforandroidapp.chapter2;
+package com.practice.architectureforandroidapp.chapter2.sub7;
 
 import javax.inject.Inject;
 
