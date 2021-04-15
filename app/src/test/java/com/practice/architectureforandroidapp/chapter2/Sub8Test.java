@@ -1,4 +1,4 @@
-package com.practice.architectureforandroidapp;
+package com.practice.architectureforandroidapp.chapter2;
 
 import com.practice.architectureforandroidapp.chapter2.sub8.Counter;
 import com.practice.architectureforandroidapp.chapter2.sub8.CounterComponent;

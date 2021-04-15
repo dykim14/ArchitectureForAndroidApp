@@ -1,4 +1,4 @@
-package com.practice.architectureforandroidapp.chapter2;
+package com.practice.architectureforandroidapp.chapter2.sub1_6;
 
 import android.app.Person;
 

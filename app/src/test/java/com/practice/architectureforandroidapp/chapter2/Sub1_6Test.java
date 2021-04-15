@@ -1,10 +1,10 @@
-package com.practice.architectureforandroidapp;
+package com.practice.architectureforandroidapp.chapter2;
 
-import com.practice.architectureforandroidapp.chapter2.DaggerMyComponent;
-import com.practice.architectureforandroidapp.chapter2.DaggerMyComponent2;
-import com.practice.architectureforandroidapp.chapter2.MyComponent;
-import com.practice.architectureforandroidapp.chapter2.ModuleInstance;
-import com.practice.architectureforandroidapp.chapter2.MyComponent2;
+import com.practice.architectureforandroidapp.chapter2.sub1_6.DaggerMyComponent;
+import com.practice.architectureforandroidapp.chapter2.sub1_6.DaggerMyComponent2;
+import com.practice.architectureforandroidapp.chapter2.sub1_6.MyComponent;
+import com.practice.architectureforandroidapp.chapter2.sub1_6.ModuleInstance;
+import com.practice.architectureforandroidapp.chapter2.sub1_6.MyComponent2;
 
 import org.junit.Test;
 
@@ -13,7 +13,7 @@ import org.junit.Test;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class ExampleUnitTest {
+public class Sub1_6Test {
     @Test
     public void testHelloWorld() {
         MyComponent myComponent = DaggerMyComponent.create();
@@ -22,7 +22,7 @@ public class ExampleUnitTest {
 
     @Test
     public void testModuleInstance() {
-        com.practice.architectureforandroidapp.chapter2.MyComponent myComponent = DaggerMyComponent.builder().myModule(new ModuleInstance()).build();
+        MyComponent myComponent = DaggerMyComponent.builder().myModule(new ModuleInstance()).build();
         System.out.println("result=" + myComponent.getString());
     }
 

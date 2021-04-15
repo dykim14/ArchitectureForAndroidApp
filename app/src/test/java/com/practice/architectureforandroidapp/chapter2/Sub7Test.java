@@ -1,4 +1,4 @@
-package com.practice.architectureforandroidapp;
+package com.practice.architectureforandroidapp.chapter2;
 
 import com.practice.architectureforandroidapp.chapter2.sub7.DaggerMyComponent;
 import com.practice.architectureforandroidapp.chapter2.sub7.DaggerPersonComponent;
