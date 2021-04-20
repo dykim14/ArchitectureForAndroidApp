@@ -4,12 +4,14 @@ import com.practice.architectureforandroidapp.chapter2.sub12.Animal;
 import com.practice.architectureforandroidapp.chapter2.sub12.ChildComponent;
 import com.practice.architectureforandroidapp.chapter2.sub12.DaggerMapComponent;
 import com.practice.architectureforandroidapp.chapter2.sub12.DaggerMapKeyComponent;
+import com.practice.architectureforandroidapp.chapter2.sub12.DaggerMultibindsComponent;
 import com.practice.architectureforandroidapp.chapter2.sub12.DaggerParentComponent;
 import com.practice.architectureforandroidapp.chapter2.sub12.DaggerSetComponent;
 import com.practice.architectureforandroidapp.chapter2.sub12.Foo;
 import com.practice.architectureforandroidapp.chapter2.sub12.Foo2;
 import com.practice.architectureforandroidapp.chapter2.sub12.MapComponent;
 import com.practice.architectureforandroidapp.chapter2.sub12.MapKeyComponent;
+import com.practice.architectureforandroidapp.chapter2.sub12.MultibindsComponent;
 import com.practice.architectureforandroidapp.chapter2.sub12.ParentComponent;
 import com.practice.architectureforandroidapp.chapter2.sub12.SetComponent;
 
@@ -63,6 +65,15 @@ public class Sub12Test {
         itr = childComp.strings().iterator();
         while (itr.hasNext()) {
             System.out.println(itr.next());
+        }
+    }
+
+    @Test
+    public void testMultibinds() {
+        MultibindsComponent component = DaggerMultibindsComponent.create();
+
+        for (String s : component.getStrings()) {
+            System.out.println(s);
         }
     }
 }
