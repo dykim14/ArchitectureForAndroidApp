@@ -1,7 +1,5 @@
 package com.practice.architectureforandroidapp.chapter2.sub1_6;
 
-import android.app.Person;
-
 import androidx.annotation.Nullable;
 
 import java.lang.reflect.Member;
@@ -22,20 +20,20 @@ public class MyModule {
         return "KDY";
     }
 
-//    @Provides
-//    int providesAge() {
-//        return 1000;
-//    }
+    @Provides
+    int providesAge() {
+        return 1000;
+    }
 
     @Provides
     Person providesPerson(String name, int age) {
-        return new Person.Builder().setName(name).build();
+        return new Person(name, age);
     }
 
-    @Nullable
-    @Provides
-    Integer provideInteger() {
-        return null;
-    }
+//    @Nullable
+//    @Provides
+//    Integer provideInteger() {
+//        return null;
+//    }
 
 }

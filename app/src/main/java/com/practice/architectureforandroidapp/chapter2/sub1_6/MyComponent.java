@@ -9,4 +9,6 @@ public interface MyComponent {
     String getString();
     @Nullable
     Integer getInteger();
+    Person getPerson();
+    void inject(Person person);
 }

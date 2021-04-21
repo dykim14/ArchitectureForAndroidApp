@@ -5,6 +5,7 @@ import com.practice.architectureforandroidapp.chapter2.sub1_6.DaggerMyComponent2
 import com.practice.architectureforandroidapp.chapter2.sub1_6.MyComponent;
 import com.practice.architectureforandroidapp.chapter2.sub1_6.ModuleInstance;
 import com.practice.architectureforandroidapp.chapter2.sub1_6.MyComponent2;
+import com.practice.architectureforandroidapp.chapter2.sub1_6.Person;
 
 import org.junit.Test;
 
@@ -18,6 +19,20 @@ public class Sub1_6Test {
     public void testHelloWorld() {
         MyComponent myComponent = DaggerMyComponent.create();
         System.out.println("result=" + myComponent.getString());
+    }
+
+    @Test
+    public void testPerson() {
+        MyComponent myComponent = DaggerMyComponent.create();
+        System.out.println("name = " + myComponent.getPerson().name);
+        System.out.println("age = " + myComponent.getPerson().age);
+        Person a = new Person("BBB", 999);
+//        Person a = new Person();
+        System.out.println("name = " + a.name);
+        System.out.println("age = " + a.age);
+        myComponent.inject(a);
+        System.out.println("name = " + a.name);
+        System.out.println("age = " + a.age);
     }
 
     @Test

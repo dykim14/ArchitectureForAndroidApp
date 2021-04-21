@@ -10,7 +10,7 @@ public class ModuleInstance extends MyModule {
     }
 
     @Nullable
-    @Override
+//    @Override
     Integer provideInteger() {
         return 2;
     }
