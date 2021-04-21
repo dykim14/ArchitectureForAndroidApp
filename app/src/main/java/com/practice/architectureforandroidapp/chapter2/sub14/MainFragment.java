@@ -9,31 +9,31 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import javax.inject.Inject;
+import javax.inject.Named;
+
+import dagger.android.AndroidInjection;
+import dagger.android.support.AndroidSupportInjection;
 
 public class MainFragment extends Fragment {
 
     @Inject
-    SharedPreferences sharedPreferences;
+    @Named("app")
+    String appString;
 
     @Inject
-    String activityName;
+    @Named("activity")
+    String activityString;
 
     @Inject
-    Integer randomNumber;
+    @Named("fragment")
+    String fragmentString;
 
     @Override
     public void onAttach(@NonNull Context context) {
+        AndroidSupportInjection.inject(this);
+        Log.d("MainFragment", appString);
+        Log.d("MainFragment", activityString);
+        Log.d("MainFragment", fragmentString);
         super.onAttach(context);
-        if (getActivity() instanceof MainActivity) {
-            ((MainActivity)getActivity()).getComponent()
-                    .mainFragmentComponentBuilder()
-                    .setModule(new MainFragmentModule())
-                    .setFragment(this)
-                    .build()
-                    .inject(this);
-        }
-
-        Log.d("MainFragment", activityName);
-        Log.d("MainFragment", "randomNumber = " + randomNumber);
     }
 }

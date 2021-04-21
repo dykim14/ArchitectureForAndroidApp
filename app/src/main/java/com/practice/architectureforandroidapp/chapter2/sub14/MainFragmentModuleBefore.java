@@ -1,17 +1,16 @@
 package com.practice.architectureforandroidapp.chapter2.sub14;
 
-import javax.inject.Named;
+import java.util.Random;
 
 import dagger.Module;
 import dagger.Provides;
 
 @Module
-public class MainFragmentModule {
+public class MainFragmentModuleBefore {
 
-    @Named("fragment")
     @Provides
     @FragmentScope
-    String provideString() {
-        return "String from fragment";
+    Integer provideInt() {
+        return new Random().nextInt();
     }
 }
