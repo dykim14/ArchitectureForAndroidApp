@@ -1,8 +1,5 @@
 package com.practice.architectureforandroidapp.chapter2.sub14;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-
 import javax.inject.Named;
 import javax.inject.Singleton;
 
