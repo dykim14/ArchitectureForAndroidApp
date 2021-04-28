@@ -151,20 +151,22 @@ public class Sub2Test {
 
     @Test
     public void disposableTest() {
-        Observable source = Observable.interval(1000, TimeUnit.MILLISECONDS);
+        Observable source = Observable.interval(1, TimeUnit.NANOSECONDS);
         Disposable disposable = source.subscribe(System.out::println);
+//        new Thread(() -> {
 //            try {
 //                Thread.sleep(3500);
 //            } catch (InterruptedException e) {
 //                e.printStackTrace();
 //            }
 //            disposable.dispose();
+//        }).start();
 
-        Disposable d1 = source.subscribe(System.out::println);
-        Disposable d2 = source.subscribe(System.out::println);
-        Disposable d3 = source.subscribe(System.out::println);
-        CompositeDisposable cd = new CompositeDisposable();
-        cd.addAll(d1, d2, d3);
-        cd.dispose();
+//        Disposable d1 = source.subscribe(System.out::println);
+//        Disposable d2 = source.subscribe(System.out::println);
+//        Disposable d3 = source.subscribe(System.out::println);
+//        CompositeDisposable cd = new CompositeDisposable();
+//        cd.addAll(d1, d2, d3);
+//        cd.dispose();
     }
 }
