@@ -62,14 +62,16 @@ public class Sub3Test {
 
     @Test
     public void testTimer() {
-        Observable src = Observable.timer(1, TimeUnit.SECONDS);
+        Observable src = Observable.timer(1, TimeUnit.NANOSECONDS);
         System.out.println("구독");
-        src.subscribe(event -> System.out.println("실행!"));
-//        try {
-//            Thread.sleep(1000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
+        src.subscribe(event -> {
+            System.out.println("실행!" + event);
+        });
+        try {
+            Thread.sleep(100000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
