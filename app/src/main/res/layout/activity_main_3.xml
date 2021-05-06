@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data class="ActivityMainLayoutBinding">
+        <import type="android.view.View"/>
+        <import type="java.util.Map"/>
+        <import type="java.util.List"/>
+        <import type="android.util.SparseArray"/>
+        <variable
+            name="user"
+            type="com.practice.architectureforandroidapp.chapter4.sub1.User" />
+        <variable
+            name="list"
+            type="List&lt;String>" />
+        <variable
+            name="sparse"
+            type="SparseArray&lt;String>" />
+    </data>
+<!--    <data class=".ActivityMainLayoutBinding"/>-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".chapter2.sub14.MainActivity">
+
+        <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{user.firstName}" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{user.lastName}" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{user.firstName ?? user.lastName}"
+                android:visibility='@{user.firstName.equalsIgnoreCase("KIM") ? View.VISIBLE : View.GONE}'
+                android:padding="@{@color/black == 0 ? 13: 24}"
+                />
+        </FrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
