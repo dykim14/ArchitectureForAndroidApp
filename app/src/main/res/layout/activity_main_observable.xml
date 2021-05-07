@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
-    <data class="ActivityMainLayoutBinding">
+    <data>
         <import type="android.view.View"/>
         <import type="java.util.Map"/>
         <import type="java.util.List"/>
         <import type="android.util.SparseArray"/>
+        <import type="com.practice.architectureforandroidapp.chapter4.sub1.observable.Fields"/>
         <variable
             name="user"
-            type="com.practice.architectureforandroidapp.chapter4.sub1.User" />
+            type="com.practice.architectureforandroidapp.chapter4.sub1.observable.User" />
+        <variable
+            name="user2"
+            type="androidx.databinding.ObservableList&lt;Object>" />
         <variable
             name="list"
             type="List&lt;String>" />
@@ -24,7 +28,6 @@
             name="presenter"
             type="com.practice.architectureforandroidapp.chapter4.sub1.Presenter" />
     </data>
-<!--    <data class=".ActivityMainLayoutBinding"/>-->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -47,7 +50,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{user.firstName}"
-                android:onClick="@{() -> presenter.onSaveClick(info)"/>
+                android:onClick="@{() -> presenter.onSaveClick(info)"
+                android:longClickable="true"/>
 <!--                android:onLongClick="@{(view) -> presenter.onLongClick(view, info)}"/>-->
 
             <TextView
@@ -61,7 +65,13 @@
                 android:layout_height="wrap_content"
                 android:text="@{user.firstName ?? user.lastName}"
                 android:visibility='@{user.firstName.equalsIgnoreCase("KIM") ? View.VISIBLE : View.GONE}'
-                android:padding="@{@color/black == 0 ? 13: 24}"/>
+                android:padding="@{user.age == 0 ? 13: 24}" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{user2[Fields.LAST_NAME]}"
+                android:onClick="@{handlers::onClickFriend}"/>
         </FrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
