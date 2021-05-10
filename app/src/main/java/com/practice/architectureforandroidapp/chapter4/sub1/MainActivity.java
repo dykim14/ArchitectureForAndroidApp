@@ -1,7 +1,6 @@
 package com.practice.architectureforandroidapp.chapter4.sub1;
 
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.widget.FrameLayout;
 import android.widget.TextView;
