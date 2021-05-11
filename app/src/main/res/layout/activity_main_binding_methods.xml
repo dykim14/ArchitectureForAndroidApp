@@ -7,6 +7,9 @@
         <variable
             name="user"
             type="com.practice.architectureforandroidapp.chapter4.sub1.User" />
+        <variable
+            name="color"
+            type="com.practice.architectureforandroidapp.chapter4.sub1.BindingColor" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -34,12 +37,14 @@
 
 <!--            </androidx.drawerlayout.widget.DrawerLayout>-->
 
-            <ImageView
+            <com.practice.architectureforandroidapp.chapter4.sub1.BindingImageView
                 android:id="@+id/iv"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
-                android:bgColor="@{color}"
-                android:src="@mipmap/ic_launcher" />
+                android:bgColor="@{color.imageBackground}"
+                android:src="@mipmap/ic_launcher"
+                app:imageUrl="@{color.url}"
+                app:error="@{@drawable/ic_launcher_background}"/>
 
             <TextView
                 android:layout_width="wrap_content"

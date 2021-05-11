@@ -6,6 +6,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.databinding.BindingMethod;
 import androidx.databinding.BindingMethods;
 import androidx.databinding.DataBindingUtil;
@@ -13,11 +14,6 @@ import androidx.databinding.DataBindingUtil;
 import com.practice.architectureforandroidapp.R;
 import com.practice.architectureforandroidapp.databinding.ActivityMainBindingMethodsBinding;
 
-@BindingMethods({
-        @BindingMethod(type = ImageView.class,
-                attribute = "android:bgColor",
-                method = "setBackgroundColor"),
-})
 public class BindingMethodActivity extends AppCompatActivity {
 
     ActivityMainBindingMethodsBinding binding2;
@@ -28,9 +24,5 @@ public class BindingMethodActivity extends AppCompatActivity {
 
         binding2 = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.activity_main_binding_methods, null, false);
         
-    }
-
-    public void setBackgroundColor(int color) {
-
     }
 }
