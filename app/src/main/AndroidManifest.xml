@@ -22,6 +22,7 @@
         </activity>
         <activity android:name=".chapter4.sub1.MainActivity" />
         <activity android:name=".chapter4.sub1.BindingMethodActivity" />
+        <activity android:name=".chapter4.sub1.ClickBindingActivity" />
     </application>
 
 </manifest>
