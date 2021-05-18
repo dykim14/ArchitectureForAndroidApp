@@ -105,3 +105,148 @@ UI 컴포넌트에 데이터를 저장하게 되면 예외 사항 대응이 힘�
 - 데이터는 ViewModel에 관리하며 데이터의 변경이 감지되는 대로 UI 컴포넌트의 바인딩된 뷰에 나타낸다.
 - ViewModel은 내부 데이터베이스 만을 항상 참조하고, 클라이언트의 데이터베이스와 서버의 데이터베이스가 요청으로 비동기적으로 동기화한다.
 
+
+7. 안드로이드 어플리케이션 설계 패턴
+
+MVC - Model-View-Controller
+
+Model
+: 어플리케이션의 비즈니스 로직과 사용되는 데이터를 다루는 영역
+비즈니스 데이터는 DBMS에 의해 관리되고 몇몇 함수를 통해 데이터를 제공하거나 입력, 수정 등을 하는 역할을 한다.
+데이터베이스의 entity를 담당하는 POJO 클래스를 포함한 SQLite, Room, Realm 등이 될 수 있다.
+
+View
+: 사용자에게 표현되는 영역
+모델로부터 얻은 데이터를 뷰에서 표현.
+액티비티, 프래그먼트..
+
+Controller
+: 뷰로부터 입력/이벤트를 받으면 모델/뷰를 변경할 수 있다.
+액티비티, 프래그먼트는 뷰와 컨트롤러 역할을 겸하기도 한다.
+
+장점
+직관적이라 이해하기 쉽다
+규모가 작은 앱에 적합하며 개발 기간이 짧아지고 코드 파악도 쉽다
+
+단점
+코드가 커질수록 뷰/컨트롤러 코드가 커져서 유지보수가 어려워 진다.
+컨트롤러가 뷰와 모델 모두에 의존적인 형태가 되므로 유닛테스트가 어렵다.
+
+
+MVP - Model-View-Presenter
+MVC와 비슷하나 액티비티와 프래그먼트의 UI와 비즈니스 로직을 분리하는 데 집중함
+이를 통해 유닛 테스트를 할 수 있다.
+
+장점
+Presenter는 View와 1:1 관계를 맺으며, View와 모델을 연결해주는 역할
+View와 모델의 의존성이 없어지므로 유닛 테스트가 수월함.
+
+단점
+View와 Presenter 간의 의존성이 높고, 1:1 관계이므로 Presenter를 재사용할 수 없어 그만큼 클래스가 많아짐
+앱이 커질수록 Presenter가 거대해지는 단점이 있다.
+
+구현하기
+
+1. Contract class 만들기
+구성 요소의 역할과 관계를 정의한다.
+구성 요소는 보통 View와 Presenter 정도만 정의.
+Model은 보통 Repository 패턴으로 따로 정의하여 Presenter를 구현할 때 포함한다.
+
+public class MainContract {
+    public interface View {
+        void showPersonList(List<Person> personList);
+        void notifyDataChanged();
+    }
+
+    public interface Presenter {
+        void load();
+        void addPerson(Person person);
+        void removePerson(Person person);
+    }
+}
+
+2. Presenter class 만들기
+
+View의 역할
+1) View 인터페이스에 정의된 메서드를 재정의하여 데이터를 화면에 나타낸다.
+2) Presenter에 생명 주기 또는 클릭 이벤트에 대한 내용을 통지한다.
+View의 구현은 보통 액티비티 또는 프래그먼트에서 이루어진다.
+
+public class MainPresenter implements MainContract.Presenter {
+
+    private Database database;
+    private MainContract.View view;
+
+    public MainPresenter(Database database, MainContract.View view) {
+        this.database = database;
+        this.view = view;
+        this.database.setOnDatabaseListener(new Database.DatabaseListener() {
+            @Override
+            public void onChanged() {
+                MainPresenter.this.view.notifyDataChanged();
+            }
+        }
+    }
+
+    @Override
+    void load() {
+        view.showPersonList(database.getPersonList(());
+    }
+
+    @Override
+    void addPerson(Person person) {
+        database.add(person);
+    }
+
+    @Override
+    void removePerson(Person person) {
+        database.remove(person);
+    }
+}
+
+
+MVVM 디자인 패턴
+
+View와 Presenter가 강하게 연결되는 점을 해결하기 위해 등장
+데이터 바인딩과 LiveData/RxJava와 같은 Observable 타입을 이용하여 View와 Presenter 간의 강한 연결을 끊는다.
+ViewModel이 Presenter 대신 사용되며, View에 표현할 데이터인 Observable 타입을 관리한다.
+View들이 ViewModel에 데이터를 구독 요청하여 화면에 나타내는 것이 핵심.
+View와 ViewModel은 1:N 관계가 있다.
+데이터 바인딩 라이브러리는 ViewModel이 View에 의존성을 갖지 않고 느슨하게 연결되도록 한다.
+
+ViewModel 구현하기
+MainViewModel은 Person 목록을 가지고 있고, View와 관련된 코드들을 참조하지 않는 것이 MVVM의 핵심이다.
+
+public class MainViewModel extends BaseObservable {
+    private Database database;
+
+    private List<Person> items = new ArrayList<>();
+
+    public MainViewModel(Database database) {
+        this.database = database;
+        this.database.setOnDatabaseListener(new Database.DatabaseListener() {
+            @Override
+            public void onChanged() {
+                load();
+            }
+        }
+    }
+
+    public void load() {
+        items.clear();
+        items.addAll(database.getPersonList());
+        notifyChange();
+    }
+
+    void addPerson(Person person) {
+        database.add(person);
+    }
+
+    void removePerson(Person person) {
+        database.remove(person);
+    }
+
+    public List<Person> getItems() {
+        return items;
+    }
+}
